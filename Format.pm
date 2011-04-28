@@ -355,6 +355,11 @@ sub _check_seps
             if $self->{"${prefix}decimal_point"} eq
                 $self->{"${prefix}thousands_sep"};
     }
+
+    # On some platforms, the thousands sep and mon decimal point
+    # are the same, which means we can't disambiguate.
+    croak "thousands_sep and mon_decimal_point may not be equal" if
+      $self->{thousands_sep} eq $self->{mon_decimal_point};
 }
 
 ##----------------------------------------------------------------------
